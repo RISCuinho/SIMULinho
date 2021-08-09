@@ -45,10 +45,13 @@ HEADERS += \
 
 DISTFILES += \
     simulinho.v \
-    ../SIMULinho-build-Desktop_RISCuinho-Profile/simulinho.vvp
+    ../SIMULinho-build-Desktop_RISCuinho-Profile/simulinho.vvp \
+    comms.pri \
+    ../SIMULinho-build-Desktop_RISCuinho-Profile/Makefile
 
 unix:!macx: LIBS += -lvpi
 unix:!macx: LIBS += -lveriuser
+unix:!macx: LIBS += -L/usr/lib/i386-linux-gnu
 
 INCLUDEPATH += $$PWD/''
 INCLUDEPATH += /usr/include/iverilog/
@@ -70,9 +73,10 @@ objvpi.dependency_type = TYPE_C
 objvpi.variable_out = OBJECTS
 objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
 objvpi.commands = $${QMAKE_CXX} $(CXXFLAGS) \
+                     -fstack-protector-strong \
+                     -Wformat -Werror=format-security \
                      -Wall -Wextra -Wshadow \
                      -fdebug-prefix-map=/build/iverilog-3pPO9t/iverilog-10.1=. \
-                     -fstack-protector-strong -Wformat -Werror=format-security \
                      -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 QMAKE_EXTRA_COMPILERS += objvpi
 
@@ -87,7 +91,7 @@ vpi.depends = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OB
 vpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
 vpi.commands = $${QMAKE_CXX}  \
                 --shared -lvpi -lveriuser $(INCPATH) \
-                -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} ## adiciona o -lvpi
+                -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN}
 QMAKE_EXTRA_COMPILERS += vpi
 
 SOURCES_VERILOGNIZE = simulinho.v
