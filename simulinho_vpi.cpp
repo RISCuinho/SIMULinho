@@ -15,7 +15,7 @@ static int hello_calltf(char*user_data)
 void hello_register()
 {
       s_vpi_systf_data tf_data;
-
+      //t_vpi_systf_data tf_data;
       tf_data.type      = vpiSysTask;
       tf_data.tfname    = "$hello";
       tf_data.calltf    = hello_calltf;

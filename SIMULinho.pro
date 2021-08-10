@@ -21,6 +21,7 @@ DEFINES += __SIMULINHO_DUMP__
 
 SOURCES += \
     main.cpp \
+#    simulinho_vpi.cpp \
     simulinho.cpp
 
 RESOURCES += qml.qrc
@@ -49,18 +50,25 @@ DISTFILES += \
     comms.pri \
     ../SIMULinho-build-Desktop_RISCuinho-Profile/Makefile
 
+unix:!macx: LIBS += -L/usr/lib/i386-linux-gnu
 unix:!macx: LIBS += -lvpi
 unix:!macx: LIBS += -lveriuser
-unix:!macx: LIBS += -L/usr/lib/i386-linux-gnu
 
-INCLUDEPATH += $$PWD/''
+CCFLAG += -fstack-protector-strong \
+                     -Wformat -Werror=format-security \
+                     -Wall -Wextra -Wshadow \
+                     -fdebug-prefix-map=/build/iverilog-3pPO9t/iverilog-10.1=. \
+
+INCLUDEPATH += /usr/lib/i386-linux-gnu
 INCLUDEPATH += /usr/include/iverilog/
+INCLUDEPATH += $$PWD/''
 
-DEPENDPATH += $$PWD/''
 DEPENDPATH += /usr/include/iverilog/
+DEPENDPATH += /usr/lib/i386-linux-gnu
+DEPENDPATH += $$PWD/''
 
-unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libvpi.a
 unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libveriuser.a
+unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libvpi.a
 
 ## https://stackoverflow.com/questions/27683777/how-to-specify-compiler-flag-to-a-single-source-file-with-qmake
 ## http://doc.qt.io/qt-5/qmake-advanced-usage.html#adding-compilers
@@ -69,36 +77,29 @@ SOURCES_OBJVPI = simulinho_vpi.cpp
 objvpi.name = objvpi
 objvpi.input = SOURCES_OBJVPI
 objvpi.dependency_type = TYPE_C
-#objvpi.depend_command = g++ -E -M ${QMAKE_FILE_NAME} | sed "s,^.*: ,,"
 objvpi.variable_out = OBJECTS
-objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.so
 objvpi.commands = $${QMAKE_CXX} $(CXXFLAGS) \
                      -fstack-protector-strong \
                      -Wformat -Werror=format-security \
                      -Wall -Wextra -Wshadow \
                      -fdebug-prefix-map=/build/iverilog-3pPO9t/iverilog-10.1=. \
-                     -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-QMAKE_EXTRA_COMPILERS += objvpi
-
-SOURCES_VPI = simulinho_vpi.o
-vpi.name = vpi
-vpi.CONFIG += no_link
-vpi.input = SOURCES_VPI
-vpi.dependency_type = TYPE_C
-vpi.depends = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
-#vpi.depend_command = g++ -E -M ${QMAKE_FILE_NAME} | sed "s,^.*: ,,"
-#vpi.variable_out = OBJECTS
-vpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
-vpi.commands = $${QMAKE_CXX}  \
+                     -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+objvpi.commands += ;
+objvpi.commands += $${QMAKE_CXX}  \
                 --shared -lvpi -lveriuser $(INCPATH) \
-                -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN}
-QMAKE_EXTRA_COMPILERS += vpi
+                -o  ${QMAKE_FILE_OUT} ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+objvpi.commands += ;
+objvpi.commands += rm -rf ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi ; \
+                   ln -s ${QMAKE_FILE_OUT} ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
+QMAKE_EXTRA_COMPILERS += objvpi
 
 SOURCES_VERILOGNIZE = simulinho.v
 verilognize_vvp.name = VerilognizeVVP
 verilognize_vvp.CONFIG += no_link
 verilognize_vvp.input = SOURCES_VERILOGNIZE
-verilognize_vvp.depends = compiler_vpi_make_all
+#verilognize_vvp.depends = compiler_vpi_make_all
+verilognize_vvp.depends = compiler_objvpi_make_all
 verilognize_vvp.variable_out= VERILOGNIZERS
 verilognize_vvp.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vvp
 verilognize_vvp.commands = iverilog -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} ;\
