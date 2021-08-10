@@ -21,7 +21,7 @@ DEFINES += __SIMULINHO_DUMP__
 
 SOURCES += \
     main.cpp \
-    simulinho_vpi.cpp \
+#    simulinho_vpi.cpp \
     simulinho.cpp
 
 RESOURCES += qml.qrc
@@ -79,34 +79,41 @@ objvpi.input = SOURCES_OBJVPI
 objvpi.dependency_type = TYPE_C
 #objvpi.depend_command = g++ -E -M ${QMAKE_FILE_NAME} | sed "s,^.*: ,,"
 objvpi.variable_out = OBJECTS
-objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.so
 objvpi.commands = $${QMAKE_CXX} $(CXXFLAGS) \
                      -fstack-protector-strong \
                      -Wformat -Werror=format-security \
                      -Wall -Wextra -Wshadow \
                      -fdebug-prefix-map=/build/iverilog-3pPO9t/iverilog-10.1=. \
-                     -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-#QMAKE_EXTRA_COMPILERS += objvpi
+                     -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+objvpi.commands += ;
+objvpi.commands += $${QMAKE_CXX}  \
+                --shared -lvpi -lveriuser $(INCPATH) \
+                -o  ${QMAKE_FILE_OUT} ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+#objvpi.commands += ;
+#objvpi.commands += rm -rf $${first(QMAKE_FILE_OUT).vpi ; ln -s $${first(QMAKE_EXT_OBJ)} $${first(QMAKE_EXT_OBJ)}.vpi
+QMAKE_EXTRA_COMPILERS += objvpi
 
-SOURCES_VPI = simulinho_vpi.o
-vpi.name = vpi
-vpi.CONFIG += no_link
-vpi.input = SOURCES_VPI
-vpi.dependency_type = TYPE_C
-vpi.depends = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+#SOURCES_VPI = simulinho_vpi.o
+#vpi.name = vpi
+#vpi.CONFIG += no_link
+#vpi.input = SOURCES_VPI
+#vpi.dependency_type = TYPE_C
+#vpi.depends = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
 #vpi.depend_command = g++ -E -M ${QMAKE_FILE_NAME} | sed "s,^.*: ,,"
 #vpi.variable_out = OBJECTS
-vpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
-vpi.commands = $${QMAKE_CXX}  \
-                --shared -lvpi -lveriuser $(INCPATH) \
-                -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN}
-QMAKE_EXTRA_COMPILERS += vpi
+#vpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
+#vpi.commands = $${QMAKE_CXX}  \
+#                --shared -lvpi -lveriuser $(INCPATH) \
+#                -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN}
+#QMAKE_EXTRA_COMPILERS += vpi
 
 SOURCES_VERILOGNIZE = simulinho.v
 verilognize_vvp.name = VerilognizeVVP
 verilognize_vvp.CONFIG += no_link
 verilognize_vvp.input = SOURCES_VERILOGNIZE
-verilognize_vvp.depends = compiler_vpi_make_all
+#verilognize_vvp.depends = compiler_vpi_make_all
+verilognize_vvp.depends = compiler_objvpi_make_all
 verilognize_vvp.variable_out= VERILOGNIZERS
 verilognize_vvp.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vvp
 verilognize_vvp.commands = iverilog -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} ;\
