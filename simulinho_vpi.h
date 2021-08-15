@@ -1,17 +1,11 @@
 #ifndef RISCUINHO_VPI_H
 #define RISCUINHO_VPI_H
 
-#include "simulinho_global_vpi.h"
-
 #include <vpi_user.h>
 
-#include "simulinho_vpi.h"
+#define SIMULINHO_UI_OPEN_WINDOW            1
+#define SIMULINHO_UI_OPEN_WINDOW_WITH_ARGS  2
 
-static int hello_compiletf(char*user_data);
-
-static int hello_calltf(char*user_data);
-
-void hello_register();
-
+#define SIMULINHO_UI_CLOSE_WINDOW           3
 
 #endif // RISCUINHO_VPI_H
