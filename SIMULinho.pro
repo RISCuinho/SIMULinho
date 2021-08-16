@@ -59,16 +59,16 @@ unix:!macx: LIBS += -L/usr/lib/i386-linux-gnu
 unix:!macx: LIBS += -lvpi
 unix:!macx: LIBS += -lveriuser
 
-INCLUDEPATH += /usr/lib/i386-linux-gnu
-INCLUDEPATH += /usr/include/iverilog/
+#INCLUDEPATH += /usr/lib/i386-linux-gnu
+INCLUDEPATH += /usr/local/include/iverilog/
 INCLUDEPATH += $$PWD/''
 
-DEPENDPATH += /usr/include/iverilog/
+DEPENDPATH += /usr/local/include/iverilog/
 DEPENDPATH += /usr/lib/i386-linux-gnu
 DEPENDPATH += $$PWD/''
 
-unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libveriuser.a
-unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libvpi.a
+unix:!macx: PRE_TARGETDEPS += /usr/local/lib/libveriuser.a
+unix:!macx: PRE_TARGETDEPS += /usr/local/lib/libvpi.a
 
 ## https://stackoverflow.com/questions/27683777/how-to-specify-compiler-flag-to-a-single-source-file-with-qmake
 ## http://doc.qt.io/qt-5/qmake-advanced-usage.html#adding-compilers
