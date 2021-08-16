@@ -79,22 +79,22 @@ objvpi.input = SOURCE_OBJVPI
 objvpi.dependency_type = TYPE_C
 objvpi.depends = simulinho.o qrc_qml.o
 #objvpi.variable_out = OBJECTS
-objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.so
-objvpi.clean = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.*
+objvpi.output = ${QMAKE_FILE_IN_BASE}.so
+objvpi.clean = ${QMAKE_FILE_IN_BASE}.*
 objvpi.commands = $${QMAKE_CXX} -c $(CXXFLAGS) -fPIC \
                                 ${INCPATH} \
                                 -fstack-protector-strong \
                                 -Wformat -Werror=format-security -Wextra -Wshadow \
                                 -fdebug-prefix-map=/build/iverilog-3pPO9t/iverilog-10.1=. \
                                 -g \
-                                -o ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} \
+                                -o ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} \
                                 ${QMAKE_FILE_IN}
 objvpi.commands += &&
 objvpi.commands += $${QMAKE_CXX} --shared $(CXXFLAGS) \
                                  $(LIBS) \
-                                 ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} qrc_qml.o \
+                                 simulinho.o qrc_qml.o \
                                  -o ${QMAKE_FILE_OUT} \
-                                 simulinho.o
+                                 ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
 QMAKE_EXTRA_COMPILERS += objvpi
 
 SOURCE_MODULEVPI = simulinho_vpi.so
@@ -102,9 +102,9 @@ SOURCE_MODULEVPI = simulinho_vpi.so
 modulevpi.input = SOURCE_MODULEVPI
 #modulevpi.dependency_type = TYPE_C
 modulevpi.depends = compiler_objvpi_make_all
-modulevpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
-modulevpi.clean  = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
-modulevpi.clean += ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi.debug
+modulevpi.output = ${QMAKE_FILE_IN_BASE}.vpi
+modulevpi.clean  = ${QMAKE_FILE_IN_BASE}.vpi
+modulevpi.clean += ${QMAKE_FILE_IN_BASE}.vpi.debug
 modulevpi.commands = cp ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
 modulevpi.commands += &&
 modulevpi.commands += objcopy --only-keep-debug ${QMAKE_FILE_OUT} ${QMAKE_FILE_OUT}.debug
