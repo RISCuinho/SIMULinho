@@ -70,19 +70,13 @@ DEPENDPATH += /usr/local/include/iverilog
 DEPENDPATH += /usr/lib/i386-linux-gnu
 DEPENDPATH += $$PWD/''
 
-
-## https://stackoverflow.com/questions/27683777/how-to-specify-compiler-flag-to-a-single-source-file-with-qmake
-## http://doc.qt.io/qt-5/qmake-advanced-usage.html#adding-compilers
-## configura riscuinho.cpp para ser compilado adequadamente para o vpi
 SOURCE_OBJVPI = simulinho_vpi.cpp
 objvpi.name = Shared VPI Object Simulinho VPI
 objvpi.input = SOURCE_OBJVPI
 objvpi.dependency_type = TYPE_C
 objvpi.depends = simulinho.o qrc_qml.o
-#objvpi.variable_out = OBJECTS
 objvpi.output = ${QMAKE_FILE_IN_BASE}.so
 objvpi.clean = ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} ${QMAKE_FILE_IN_BASE}.so
-#g++ -c -o qtapp.o -fPIC -Wall -Wextra -Wshadow -g -O2 -I/usr/local/include/iverilog -I/usr/lib/i386-linux/gnu -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtWidgets -I/usr/include/i386-linux-gnu/qt5/ qtapp.cc
 objvpi.commands = $${QMAKE_CXX} -c $(CXXFLAGS) -fPIC \
                                 ${INCPATH} \
                                 -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtWidgets  \
@@ -93,7 +87,6 @@ objvpi.commands = $${QMAKE_CXX} -c $(CXXFLAGS) -fPIC \
                                 -o ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} \
                                 ${QMAKE_FILE_IN}
 objvpi.commands += &&
-# g++ -o qtapp.vpi -shared -L/usr/local/lib qtapp.o -lQt5Widgets -lQt5Core -lveriuser -lvpi
 objvpi.commands += $${QMAKE_CXX} -o ${QMAKE_FILE_OUT} \
                                  --shared $(LDFLAGS) \
                                  ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} qrc_qml.o \
@@ -109,12 +102,6 @@ modulevpi.depends = compiler_objvpi_make_all
 modulevpi.output = ${QMAKE_FILE_IN_BASE}.vpi
 modulevpi.clean  = ${QMAKE_FILE_IN_BASE}.vpi ${QMAKE_FILE_IN_BASE}.vpi.debug
 modulevpi.commands = cp --remove-destination ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
-#modulevpi.commands += &&
-#modulevpi.commands += objcopy --only-keep-debug ${QMAKE_FILE_OUT} ${QMAKE_FILE_OUT}.debug
-#modulevpi.commands += &&
-#modulevpi.commands += objcopy --strip-debug ${QMAKE_FILE_OUT}
-#modulevpi.commands += &&
-#modulevpi.commands += objcopy --add-gnu-debuglink=${QMAKE_FILE_OUT}.debug ${QMAKE_FILE_OUT}
 QMAKE_EXTRA_COMPILERS += modulevpi
 
 verilognize_vvp.name = VerilognizeVVP

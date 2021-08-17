@@ -3,13 +3,6 @@
 #include "simulinho.h"
 #include "simulinho_vpi.h"
 
-
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-
-//#include <QQmlDebuggingEnabler>
-//QQmlDebuggingEnabler enabler;
-
 static int simulinho_ui_compiletf(char*user_data){
     return 0;
 }
