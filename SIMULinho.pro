@@ -55,20 +55,21 @@ DISTFILES += \
     COMMAND_GLOSSARY.md \
     simulinho.v
 
+
 unix:!macx: LIBS += -L/usr/lib/i386-linux-gnu
-unix:!macx: LIBS += -lvpi
-unix:!macx: LIBS += -lveriuser
+unix:!macx: LIBS += -L/usr/local/lib/ -lvpi -lveriuser
 
-INCLUDEPATH += /usr/lib/i386-linux-gnu
-INCLUDEPATH += /usr/include/iverilog/
-INCLUDEPATH += $$PWD/''
+INCLUDEPATH += /usr/local/lib/ivl/include
+INCLUDEPATH += /usr/local/include/iverilog
 
-DEPENDPATH += /usr/include/iverilog/
+unix:!macx: PRE_TARGETDEPS += /usr/local/lib/libveriuser.a
+unix:!macx: PRE_TARGETDEPS += /usr/local/lib/libvpi.a
+
+DEPENDPATH += /usr/local/lib/ivl/include
+DEPENDPATH += /usr/local/include/iverilog
 DEPENDPATH += /usr/lib/i386-linux-gnu
 DEPENDPATH += $$PWD/''
 
-unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libveriuser.a
-unix:!macx: PRE_TARGETDEPS += /usr/lib/i386-linux-gnu/libvpi.a
 
 ## https://stackoverflow.com/questions/27683777/how-to-specify-compiler-flag-to-a-single-source-file-with-qmake
 ## http://doc.qt.io/qt-5/qmake-advanced-usage.html#adding-compilers
@@ -79,22 +80,25 @@ objvpi.input = SOURCE_OBJVPI
 objvpi.dependency_type = TYPE_C
 objvpi.depends = simulinho.o qrc_qml.o
 #objvpi.variable_out = OBJECTS
-objvpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.so
-objvpi.clean = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.*
+objvpi.output = ${QMAKE_FILE_IN_BASE}.so
+objvpi.clean = ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} ${QMAKE_FILE_IN_BASE}.so
+#g++ -c -o qtapp.o -fPIC -Wall -Wextra -Wshadow -g -O2 -I/usr/local/include/iverilog -I/usr/lib/i386-linux/gnu -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtWidgets -I/usr/include/i386-linux-gnu/qt5/ qtapp.cc
 objvpi.commands = $${QMAKE_CXX} -c $(CXXFLAGS) -fPIC \
                                 ${INCPATH} \
+                                -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtWidgets  \
                                 -fstack-protector-strong \
                                 -Wformat -Werror=format-security -Wextra -Wshadow \
                                 -fdebug-prefix-map=/build/iverilog-3pPO9t/iverilog-10.1=. \
                                 -g \
-                                -o ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} \
+                                -o ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} \
                                 ${QMAKE_FILE_IN}
 objvpi.commands += &&
-objvpi.commands += $${QMAKE_CXX} --shared $(CXXFLAGS) \
-                                 $(LIBS) \
-                                 ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} qrc_qml.o \
-                                 -o ${QMAKE_FILE_OUT} \
-                                 simulinho.o
+# g++ -o qtapp.vpi -shared -L/usr/local/lib qtapp.o -lQt5Widgets -lQt5Core -lveriuser -lvpi
+objvpi.commands += $${QMAKE_CXX} -o ${QMAKE_FILE_OUT} \
+                                 --shared $(LDFLAGS) \
+                                 ${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)} qrc_qml.o \
+                                 simulinho.o \
+                                 $(LIBS)
 QMAKE_EXTRA_COMPILERS += objvpi
 
 SOURCE_MODULEVPI = simulinho_vpi.so
@@ -102,16 +106,15 @@ SOURCE_MODULEVPI = simulinho_vpi.so
 modulevpi.input = SOURCE_MODULEVPI
 #modulevpi.dependency_type = TYPE_C
 modulevpi.depends = compiler_objvpi_make_all
-modulevpi.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
-modulevpi.clean  = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi
-modulevpi.clean += ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}.vpi.debug
-modulevpi.commands = cp ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
-modulevpi.commands += &&
-modulevpi.commands += objcopy --only-keep-debug ${QMAKE_FILE_OUT} ${QMAKE_FILE_OUT}.debug
-modulevpi.commands += &&
-modulevpi.commands += objcopy --strip-debug ${QMAKE_FILE_OUT}
-modulevpi.commands += &&
-modulevpi.commands += objcopy --add-gnu-debuglink=${QMAKE_FILE_OUT}.debug ${QMAKE_FILE_OUT}
+modulevpi.output = ${QMAKE_FILE_IN_BASE}.vpi
+modulevpi.clean  = ${QMAKE_FILE_IN_BASE}.vpi ${QMAKE_FILE_IN_BASE}.vpi.debug
+modulevpi.commands = cp --remove-destination ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
+#modulevpi.commands += &&
+#modulevpi.commands += objcopy --only-keep-debug ${QMAKE_FILE_OUT} ${QMAKE_FILE_OUT}.debug
+#modulevpi.commands += &&
+#modulevpi.commands += objcopy --strip-debug ${QMAKE_FILE_OUT}
+#modulevpi.commands += &&
+#modulevpi.commands += objcopy --add-gnu-debuglink=${QMAKE_FILE_OUT}.debug ${QMAKE_FILE_OUT}
 QMAKE_EXTRA_COMPILERS += modulevpi
 
 verilognize_vvp.name = VerilognizeVVP
@@ -120,9 +123,10 @@ verilognize_vvp.depends += compiler_modulevpi_clean
 verilognize_vvp.depends += compiler_objvpi_make_all
 verilognize_vvp.depends += compiler_modulevpi_make_all
 verilognize_vvp.variable_out = VERILOGNIZERS_VVP
-verilognize_vvp.commands  = iverilog -o simulinho.vvp $${_PRO_FILE_PWD_}/simulinho.v
+verilognize_vvp.commands  = iverilog -L . -m simulinho_vpi \
+                                 -o simulinho.vvp $${_PRO_FILE_PWD_}/simulinho.v
 verilognize_vvp.commands += &&
-verilognize_vvp.commands += vvp -M. -msimulinho_vpi simulinho.vvp
+verilognize_vvp.commands += vvp -v simulinho.vvp
 QMAKE_EXTRA_TARGETS += verilognize_vvp
 
 verilognize.name = Verilognize
