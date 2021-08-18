@@ -4,26 +4,19 @@
 #include <QMainWindow>
 
 namespace Ui {
-    class SIMULinhoWindow;
+class SIMULinhoWindow;
 }
 
 class SIMULinhoWindow : public QMainWindow
 {
     Q_OBJECT
+
 public:
-    explicit SIMULinhoWindow(QWidget *parent = nullptr);
+    explicit SIMULinhoWindow(QWidget *parent = 0);
     ~SIMULinhoWindow();
-
-signals:
-
-public slots:
-
-private slots:
-    void on_label_windowTitleChanged(const QString &title);
 
 private:
     Ui::SIMULinhoWindow *ui;
 };
-
 
 #endif // SIMULINHOWINDOW_H
