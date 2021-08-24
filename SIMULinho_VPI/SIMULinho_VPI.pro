@@ -10,6 +10,12 @@ TARGET = SIMULinho_VPI
 TEMPLATE = lib
 
 CONFIG += dll
+CONFIG += c++11
+
+CONFIG += no_keywords
+unix:CONFIG += link_pkgconfig
+unix:PKGCONFIG += dbus-cxx-2.0
+
 
 VERSION = 0.0.1
 
@@ -53,3 +59,10 @@ modulevpi.commands = $${QMAKE_CXX} -o ${QMAKE_FILE_OUT} \
                                  ${QMAKE_FILE_IN} \
                                  $(LIBS)
 QMAKE_EXTRA_COMPILERS += modulevpi
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
+else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
+
+INCLUDEPATH += $$PWD/../SIMULinho_LIB
+DEPENDPATH += $$PWD/../SIMULinho_LIB

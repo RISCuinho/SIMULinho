@@ -1,15 +1,15 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2021-08-17T20:52:42
+# Project created by QtCreator 2021-08-17T21:37:00
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       -= gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TARGET = SIMULinho_LIB
+TEMPLATE = lib
 
-TARGET = SIMULinho_UI
-TEMPLATE = app
+DEFINES += SIMULINHO_LIB_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -22,20 +22,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-
 SOURCES += \
-        main.cpp \
-        simulinhowindow.cpp
+        simulinho_lib.cpp
 
 HEADERS += \
-    simulinhowindow.h
+        simulinho_lib.h \
+        simulinho_lib_global.h 
 
-FORMS += \
-    simulinhowindow.ui
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
-else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
-
-INCLUDEPATH += $$PWD/../SIMULinho_LIB
-DEPENDPATH += $$PWD/../SIMULinho_LIB
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}

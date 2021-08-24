@@ -1,26 +1,31 @@
 TEMPLATE = subdirs
 
-CONFIG += c++11
+CONFIG += c++17
 
-DEFINES += SIMULINHO
+CONFIG += no_keywords
+unix:CONFIG += link_pkgconfig
+unix:PKGCONFIG += dbus-cxx-qt-2.0
 
-SUBDIRS = SIMULinho_VPI \
-    SIMULinho_UI
-
-SIMULinho_VPI.subdir = SIMULinho_VPI
-SIMULinho_VPI.depend = SIMULinho_UI
-
+DEFINES += _SIMULINHO_
 # Usado pelo RTL e ferramentas de simulação
 DEFINES += __SIMULINHO_DUMP__
 
+SUBDIRS = SIMULinho_VPI \
+    SIMULinho_UI \
+    SIMULinho_LIB
+
+SIMULinho_UI.subdir = SIMULinho_UI
+SIMULinho_UI.depend += SIMULinho_LIB
+
+SIMULinho_VPI.subdir = SIMULinho_VPI
+SIMULinho_VPI.depend = SIMULinho_UI
+SIMULinho_VPI.depend += SIMULinho_LIB
 
 DISTFILES += \
     comms.pri \
     temp.txt \
     COMMAND_GLOSSARY.md \
     simulinho.v
-
-
 
 verilognize_vvp.name = Verilognize VVP
 verilognize_vvp.depends  = SIMULinho_VPI

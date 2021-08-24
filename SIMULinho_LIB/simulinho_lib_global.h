@@ -1,0 +1,12 @@
+#ifndef SIMULINHO_LIB_GLOBAL_H
+#define SIMULINHO_LIB_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SIMULINHO_LIBRARY)
+#  define SIMULINHO_LIB_SHARED Q_DECL_EXPORT
+#else
+#  define SIMULINHO_LIB_SHARED Q_DECL_IMPORT
+#endif
+
+#endif // SIMULINHO_LIB_GLOBAL_H
