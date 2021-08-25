@@ -21,7 +21,8 @@ SIMULinho_VPI.subdir = SIMULinho_VPI
 SIMULinho_VPI.depend = SIMULinho_UI
 SIMULinho_VPI.depend += SIMULinho_LIB
 
-DISTFILES += \
+RESOURCES += \
+    TODO.md \
     comms.pri \
     temp.txt \
     COMMAND_GLOSSARY.md \

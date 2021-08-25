@@ -33,3 +33,6 @@ unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+DISTFILES += \
+    SIMULinho_dbus.xml
