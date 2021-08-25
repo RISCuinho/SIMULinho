@@ -24,6 +24,7 @@ SIMULinho_VPI.depend = SIMULinho_UI
 SIMULinho_VPI.depend += SIMULinho_LIB
 
 RESOURCES += \
+    HowtoExecQTCreator.md \
     TODO.md \
     comms.pri \
     temp.txt \
