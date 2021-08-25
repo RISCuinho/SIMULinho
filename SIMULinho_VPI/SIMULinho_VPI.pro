@@ -40,7 +40,15 @@ HEADERS += \
         simulinhovpi.h \
         simulinho.h
 
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
+else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
+
+DEPENDPATH += $$PWD/../SIMULinho_LIB
 DEPENDPATH += /usr/local/include/iverilog
+
+INCLUDEPATH += $$PWD/../SIMULinho_LIB
 INCLUDEPATH += /usr/local/include/iverilog
 
 unix:!macx: LIBS += -L/usr/local/lib/ -lvpi -lveriuser
@@ -54,17 +62,11 @@ SOURCE_modulevpi = simulinho.o
 modulevpi.name = Shared VPI Object Simulinho VPI
 modulevpi.input = SOURCE_modulevpi
 modulevpi.dependency_type = TYPE_C
+modulevpi.depends = simulinhovpi.o
 modulevpi.output = ${QMAKE_FILE_IN_BASE}.vpi
 #  g++ -o simulinho_vpi.so --shared  simulinho_vpi.o qrc_qml.o simulinho.o  -L/usr/lib/i386-linux-gnu -L/usr/local/lib/ -lvpi -lveriuser -lQt5Quick -lQt5Gui -lQt5Qml -lQt5Network -lQt5Core -lGL -lpthread
 modulevpi.commands = $${QMAKE_CXX} -o ${QMAKE_FILE_OUT} \
                                  --shared $(LDFLAGS) \
-                                 ${QMAKE_FILE_IN} \
+                                  simulinhovpi.o ${QMAKE_FILE_IN} \
                                  $(LIBS)
 QMAKE_EXTRA_COMPILERS += modulevpi
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
-else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
-
-INCLUDEPATH += $$PWD/../SIMULinho_LIB
-DEPENDPATH += $$PWD/../SIMULinho_LIB
