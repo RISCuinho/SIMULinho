@@ -31,7 +31,7 @@ RESOURCES += \
 verilognize_vvp.name = Verilognize VVP
 verilognize_vvp.depends  = SIMULinho_VPI
 verilognize_vvp.variable_out = VERILOGNIZERS_VVP
-verilognize_vvp.commands  = iverilog -L . -m simulinho_vpi \
+verilognize_vvp.commands  = iverilog -L . -m simulinho \
                                  -o simulinho.vvp $${_PRO_FILE_PWD_}/simulinho.v
 QMAKE_EXTRA_TARGETS += verilognize_vvp
 

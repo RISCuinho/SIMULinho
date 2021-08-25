@@ -6,7 +6,7 @@
 
 QT       -= gui
 
-TARGET = SIMULinho_VPI
+TARGET = simulinho
 TEMPLATE = lib
 
 CONFIG += dll
@@ -33,10 +33,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        simulinhovpi.cpp
+        simulinhovpi.cpp \
+        simulinho.cpp
 
 HEADERS += \
-        simulinhovpi.h
+        simulinhovpi.h \
+        simulinho.h
 
 DEPENDPATH += /usr/local/include/iverilog
 INCLUDEPATH += /usr/local/include/iverilog
@@ -48,7 +50,7 @@ unix {
     INSTALLS += target
 }
 
-SOURCE_modulevpi = simulinhovpi.o
+SOURCE_modulevpi = simulinho.o
 modulevpi.name = Shared VPI Object Simulinho VPI
 modulevpi.input = SOURCE_modulevpi
 modulevpi.dependency_type = TYPE_C
