@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>400</height>
+    <width>1019</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,13 +16,25 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLabel" name="initialLabel">
-      <property name="text">
-       <string>SIMULinho UI</string>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
+      <widget class="QWidget" name="tabMemoria">
+       <attribute name="title">
+        <string>Memória</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabAlu">
+       <attribute name="title">
+        <string>ALUs</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabDecodificadorDeInstrucoes">
+       <attribute name="title">
+        <string>Decodificador de Instruções</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -32,8 +44,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>650</width>
-     <height>20</height>
+     <width>1019</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAjuda">
@@ -44,15 +56,26 @@
    </widget>
    <widget class="QMenu" name="menuUnidades">
     <property name="title">
-     <string>Unidades</string>
+     <string>Módulos (Unidades)</string>
     </property>
-    <addaction name="actionRegistradores"/>
     <addaction name="actionDecodificador_de_Instru_o"/>
-    <addaction name="actionALU_Integer"/>
+    <addaction name="separator"/>
+    <addaction name="actionRegistradores"/>
+    <addaction name="actionMemoriaDePrograma"/>
+    <addaction name="actionMemriaDeDados"/>
+    <addaction name="separator"/>
+    <addaction name="actionALUInteger"/>
+    <addaction name="separator"/>
     <addaction name="actionData_Base_Control_Unit_DBCu"/>
+   </widget>
+   <widget class="QMenu" name="menuSa_r">
+    <property name="title">
+     <string>Saír</string>
+    </property>
    </widget>
    <addaction name="menuAjuda"/>
    <addaction name="menuUnidades"/>
+   <addaction name="menuSa_r"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSobre">
@@ -70,7 +93,7 @@
     <string>Decodificador de Instrução</string>
    </property>
   </action>
-  <action name="actionALU_Integer">
+  <action name="actionALUInteger">
    <property name="text">
     <string>ALU Integer</string>
    </property>
@@ -78,6 +101,16 @@
   <action name="actionData_Base_Control_Unit_DBCu">
    <property name="text">
     <string>Data Base Control Unit (DBCu)</string>
+   </property>
+  </action>
+  <action name="actionMemoriaDePrograma">
+   <property name="text">
+    <string>Memória de Programa</string>
+   </property>
+  </action>
+  <action name="actionMemriaDeDados">
+   <property name="text">
+    <string>Memória de Dados</string>
    </property>
   </action>
  </widget>

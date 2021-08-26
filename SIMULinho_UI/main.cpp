@@ -1,10 +1,10 @@
-#include "simulinhowindow.h"
+#include "simulinho.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    SIMULinhoWindow w;
+    SIMULinho w;
 
     w.setWindowTitle("SIMULinho!");
 
