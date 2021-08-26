@@ -25,13 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        simulinhowindow.cpp
+        simulinho.cpp
 
 HEADERS += \
-    simulinhowindow.h
+    simulinho.h
 
 FORMS += \
-    simulinhowindow.ui
+    simulinho.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
