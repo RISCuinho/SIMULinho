@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE node PUBLIC
     "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
-    "https://www.freedesktop.org/standards/dbus/1.0/introspect.dtd" >
+    "https://specifications.freedesktop.org/dbus/introspect-latest.dtd" >
 <node xmlns:doc="http://www.freedesktop.org/dbus/1.0/doc.dtd">
   <interface name="org.riscuinho.simulinho.UISimulinho">
     <doc:doc>
@@ -30,5 +30,10 @@
         </doc:description>
       </doc:doc>
     </method>
+    
+    <signal name="WindowClosed">
+      <arg name="uuid" type="s"></arg>
+    </signal>
+    <signal name="UIClosed"></signal>
   </interface>
 </node>
