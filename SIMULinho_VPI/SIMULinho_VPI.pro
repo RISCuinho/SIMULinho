@@ -10,7 +10,7 @@ TARGET = simulinho
 TEMPLATE = lib
 
 CONFIG += dll
-CONFIG += c++11
+CONFIG += c++17
 
 CONFIG += no_keywords
 unix:CONFIG += link_pkgconfig
@@ -40,15 +40,8 @@ HEADERS += \
         simulinhovpi.h \
         simulinho.h
 
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
-else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
-
-DEPENDPATH += $$PWD/../SIMULinho_LIB
 DEPENDPATH += /usr/local/include/iverilog
 
-INCLUDEPATH += $$PWD/../SIMULinho_LIB
 INCLUDEPATH += /usr/local/include/iverilog
 
 unix:!macx: LIBS += -L/usr/local/lib/ -lvpi -lveriuser
@@ -70,3 +63,10 @@ modulevpi.commands = $${QMAKE_CXX} -o ${QMAKE_FILE_OUT} \
                                   simulinhovpi.o ${QMAKE_FILE_IN} \
                                  $(LIBS)
 QMAKE_EXTRA_COMPILERS += modulevpi
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
+else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
+
+INCLUDEPATH += $$PWD/../SIMULinho_LIB
+DEPENDPATH += $$PWD/../SIMULinho_LIB

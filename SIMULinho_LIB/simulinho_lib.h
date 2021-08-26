@@ -3,11 +3,11 @@
 
 #include "simulinho_lib_global.h"
 
-class SIMULINHO_LIB_SHARED SIMULinho_LIB
+class SIMULINHO_LIB_SHARED SIMULinhoLIB
 {
 
 public:
-    SIMULinho_LIB();
+    SIMULinhoLIB();
 };
 
 #endif // SIMULINHO_LIB_H

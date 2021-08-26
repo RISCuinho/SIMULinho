@@ -6,6 +6,8 @@
 
 QT       -= gui
 
+CONFIG += c++17
+
 TARGET = SIMULinho_LIB
 TEMPLATE = lib
 
