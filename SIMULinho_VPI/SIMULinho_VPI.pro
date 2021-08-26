@@ -54,7 +54,7 @@ unix {
 SOURCE_modulevpi = simulinho.o
 modulevpi.name = Shared VPI Object Simulinho VPI
 modulevpi.input = SOURCE_modulevpi
-modulevpi.dependency_type = TYPE_C
+##modulevpi.dependency_type = TYPE_C
 modulevpi.depends = simulinhovpi.o
 modulevpi.output = ${QMAKE_FILE_IN_BASE}.vpi
 #  g++ -o simulinho_vpi.so --shared  simulinho_vpi.o qrc_qml.o simulinho.o  -L/usr/lib/i386-linux-gnu -L/usr/local/lib/ -lvpi -lveriuser -lQt5Quick -lQt5Gui -lQt5Qml -lQt5Network -lQt5Core -lGL -lpthread

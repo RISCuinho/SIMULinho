@@ -14,8 +14,8 @@ SIMULinho::SIMULinho(QWidget *parent) : QMainWindow(parent),  ui(new Ui::SIMULin
     statusProgressBar = new QProgressBar(this);
 
     // add the two controls to the status bar
-    ui->statusBar->addPermanentWidget(statusLabel);
-    ui->statusBar->addPermanentWidget(statusProgressBar,1);
+    ui->statusbar->addPermanentWidget(statusLabel);
+    ui->statusbar->addPermanentWidget(statusProgressBar,1);
 
     // set text for the label
     statusLabel->setText("Status Label!");

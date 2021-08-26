@@ -17,8 +17,8 @@ class SIMULinho : public QMainWindow
     Q_OBJECT
 
 protected:
-    QLabel statusLabel;
-    QProgressBar statusProgressBar;
+    QLabel *statusLabel;
+    QProgressBar *statusProgressBar;
 
 public:
     explicit SIMULinho(QWidget *parent = nullptr);

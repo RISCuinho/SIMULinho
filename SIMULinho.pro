@@ -17,12 +17,12 @@ SUBDIRS = \
 
 SIMULinho_LIB.subdir = SIMULinho_LIB
 
-SIMULinho_UI.subdir = SIMULinho_UI
 SIMULinho_UI.depend += SIMULinho_LIB
+SIMULinho_UI.subdir += SIMULinho_UI
 
 SIMULinho_VPI.subdir = SIMULinho_VPI
-SIMULinho_VPI.depend = SIMULinho_UI
 SIMULinho_VPI.depend += SIMULinho_LIB
+SIMULinho_VPI.depend += SIMULinho_UI
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/SIMULinho_LIB/release/ -lSIMULinho_LIB
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/SIMULinho_LIB/debug/ -lSIMULinho_LIB

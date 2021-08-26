@@ -1,8 +1,8 @@
 #include "simulinho_lib.h"
 
-#include <stdlib.h>
+//#include <stdlib.h>
 
 SIMULinhoLIB::SIMULinhoLIB()
 {
-    printf("SIMULinho LIB!");
+   // printf("SIMULinho LIB!");
 }
