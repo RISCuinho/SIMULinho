@@ -39,16 +39,16 @@
           <height>411</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="memoryHorizontalLayout">
          <property name="sizeConstraint">
           <enum>QLayout::SetMinAndMaxSize</enum>
          </property>
          <item>
-          <widget class="QScrollArea" name="scrollArea">
+          <widget class="QScrollArea" name="registersScrollArea">
            <property name="widgetResizable">
             <bool>true</bool>
            </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents">
+           <widget class="QWidget" name="registersScrollAreaWidgetContents">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -57,7 +57,7 @@
               <height>407</height>
              </rect>
             </property>
-            <widget class="QTableView" name="tableView">
+            <widget class="MemoryTable" name="registersTableView">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -180,8 +180,7 @@
    <addaction name="menuUnidades"/>
    <addaction name="menuSair"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar">
-  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSobre">
    <property name="text">
     <string>Sobre</string>
@@ -226,6 +225,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MemoryTable</class>
+   <extends>QTableView</extends>
+   <header location="global">memorytable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
