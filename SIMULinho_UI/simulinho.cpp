@@ -1,4 +1,5 @@
 #include "simulinho.h"
+#include "memorytable.h"
 #include "ui_simulinho.h"
 
 #include <QWidget>
@@ -22,6 +23,11 @@ SIMULinho::SIMULinho(QWidget *parent) : QMainWindow(parent),  ui(new Ui::SIMULin
 
     // make progress bar text invisible
     statusProgressBar->setTextVisible(false);
+
+}
+
+void SIMULinho::setRegisterTableModel(QAbstractItemModel * model){
+    ui->registersTableView->init(model);
 
 }
 

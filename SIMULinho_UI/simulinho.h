@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QLabel>
+#include <QAbstractItemModel>
 #include <QStatusBar>
 #include <QProgressBar>
 
@@ -22,6 +23,7 @@ protected:
 
 public:
     explicit SIMULinho(QWidget *parent = nullptr);
+    void setRegisterTableModel(QAbstractItemModel * model);
     ~SIMULinho();
 
 signals:

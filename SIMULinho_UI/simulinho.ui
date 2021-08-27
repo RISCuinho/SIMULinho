@@ -39,17 +39,34 @@
           <height>411</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="memoryHorizontalLayout">
          <property name="sizeConstraint">
           <enum>QLayout::SetMinAndMaxSize</enum>
          </property>
          <item>
-          <widget class="QScrollArea" name="scrollArea">
+          <widget class="QScrollArea" name="registersScrollArea">
            <property name="widgetResizable">
             <bool>true</bool>
            </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents">
-            <widget class="QTableView" name="tableView"/>
+           <widget class="QWidget" name="registersScrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>327</width>
+              <height>407</height>
+             </rect>
+            </property>
+            <widget class="MemoryTable" name="registersTableView">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>256</width>
+               <height>192</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </widget>
          </item>
@@ -59,7 +76,24 @@
             <bool>true</bool>
            </property>
            <widget class="QWidget" name="scrollAreaWidgetContents_3">
-            <widget class="QTableView" name="tableView_3"/>
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>327</width>
+              <height>407</height>
+             </rect>
+            </property>
+            <widget class="QTableView" name="tableView_3">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>256</width>
+               <height>192</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </widget>
          </item>
@@ -77,7 +111,16 @@
               <height>407</height>
              </rect>
             </property>
-            <widget class="QTableView" name="tableView_2"/>
+            <widget class="QTableView" name="tableView_2">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>256</width>
+               <height>192</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </widget>
          </item>
@@ -104,7 +147,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAjuda">
@@ -182,6 +225,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MemoryTable</class>
+   <extends>QTableView</extends>
+   <header location="global">memorytable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

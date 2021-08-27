@@ -27,10 +27,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         simulinho.cpp \
-        main.cpp
+        main.cpp \
+    memorytable.cpp
 
 HEADERS += \
-    simulinho.h
+    simulinho.h \
+    memorytable.h
 
 FORMS += \
     simulinho.ui
@@ -41,3 +43,8 @@ else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
 
 INCLUDEPATH += $$PWD/../SIMULinho_LIB
 DEPENDPATH += $$PWD/../SIMULinho_LIB
+
+RESOURCES += registers.qrc
+
+DISTFILES += \
+    registers.txt
