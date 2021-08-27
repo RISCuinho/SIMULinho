@@ -30,99 +30,27 @@
        <attribute name="title">
         <string>Memória</string>
        </attribute>
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QWidget" name="">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
+          <y>3</y>
           <width>1001</width>
-          <height>411</height>
+          <height>551</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="memoryHorizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <property name="sizeConstraint">
-          <enum>QLayout::SetMinAndMaxSize</enum>
+          <enum>QLayout::SetMaximumSize</enum>
          </property>
          <item>
-          <widget class="QScrollArea" name="registersScrollArea">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="registersScrollAreaWidgetContents">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>327</width>
-              <height>407</height>
-             </rect>
-            </property>
-            <widget class="MemoryTable" name="registersTableView">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>256</width>
-               <height>192</height>
-              </rect>
-             </property>
-            </widget>
-           </widget>
-          </widget>
+          <widget class="MemoryTable" name="registersTableView"/>
          </item>
          <item>
-          <widget class="QScrollArea" name="scrollArea_3">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_3">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>327</width>
-              <height>407</height>
-             </rect>
-            </property>
-            <widget class="QTableView" name="tableView_3">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>256</width>
-               <height>192</height>
-              </rect>
-             </property>
-            </widget>
-           </widget>
-          </widget>
+          <widget class="QTableView" name="tableView_2"/>
          </item>
          <item>
-          <widget class="QScrollArea" name="scrollArea_2">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_2">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>327</width>
-              <height>407</height>
-             </rect>
-            </property>
-            <widget class="QTableView" name="tableView_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>256</width>
-               <height>192</height>
-              </rect>
-             </property>
-            </widget>
-           </widget>
-          </widget>
+          <widget class="QTableView" name="tableView_3"/>
          </item>
         </layout>
        </widget>
@@ -230,6 +158,10 @@
    <class>MemoryTable</class>
    <extends>QTableView</extends>
    <header location="global">memorytable.h</header>
+   <slots>
+    <signal>signal1()</signal>
+    <slot>slot1()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
