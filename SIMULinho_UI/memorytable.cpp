@@ -117,6 +117,9 @@ void MemoryTable::init()
 
       setHorizontalScrollMode(ScrollPerPixel);
       setVerticalScrollMode(ScrollPerPixel);
+
+      verticalHeader()->setVisible(false);
+
       fieldNameTableView->setVerticalScrollMode(ScrollPerPixel);
 }
 

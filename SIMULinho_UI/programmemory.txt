@@ -1,0 +1,8 @@
+Address, Data, Description
+
+# A memória de programa inicial de referência deve ser definida com alguns endereços examplos
+# Estes endereços serão substituido pelo modelo enviado do simulador, através do dbus.
+
+0x000000, 00000, endereço inicial
+0x040000, 00000, Um endereço qualquer
+0xffffff, 00000, endereço final

@@ -24,6 +24,8 @@ protected:
 public:
     explicit SIMULinho(QWidget *parent = nullptr);
     void setRegisterTableModel(QAbstractItemModel * model);
+    void setDataTableModel(QAbstractItemModel * model);
+    void setProgramTableModel(QAbstractItemModel * model);
     ~SIMULinho();
 
 signals:

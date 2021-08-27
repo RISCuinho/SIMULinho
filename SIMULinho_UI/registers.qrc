@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/" >
-        <file>registers.txt</file>
-    </qresource>
-</RCC>
