@@ -26,6 +26,9 @@ public:
 
 signals:
 
+private slots:
+    void on_actionSair_triggered();
+
 private:
     Ui::SIMULinho *ui;
 };

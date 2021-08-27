@@ -7,7 +7,8 @@
 
 SIMULinho::SIMULinho(QWidget *parent) : QMainWindow(parent),  ui(new Ui::SIMULinho)
 {
-    ui->setupUi(this);
+
+
 
     // create objects for the label and progress bar
     statusLabel = new QLabel(this);
@@ -23,6 +24,8 @@ SIMULinho::SIMULinho(QWidget *parent) : QMainWindow(parent),  ui(new Ui::SIMULin
     // make progress bar text invisible
     statusProgressBar->setTextVisible(false);
 
+    ui->setupUi(this);
+
 }
 
 SIMULinho::~SIMULinho()
@@ -30,3 +33,10 @@ SIMULinho::~SIMULinho()
     delete ui;
 }
 
+
+void SIMULinho::on_actionSair_triggered()
+{
+    //connect(ui->actionSair, &QAction::triggered, this, &QWidget::close);
+    printf("Sair!\n");
+
+}
