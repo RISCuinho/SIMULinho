@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>registers.txt</file>
+        <file>programmemory.txt</file>
+        <file>datamemory.txt</file>
+    </qresource>
+</RCC>

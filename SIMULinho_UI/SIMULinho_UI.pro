@@ -44,7 +44,6 @@ else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
 INCLUDEPATH += $$PWD/../SIMULinho_LIB
 DEPENDPATH += $$PWD/../SIMULinho_LIB
 
-RESOURCES += registers.qrc
+RESOURCES += \
+    memory.qrc
 
-DISTFILES += \
-    registers.txt

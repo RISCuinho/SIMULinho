@@ -1,0 +1,13 @@
+Address, Data, Description, Group
+
+# o modelo abaixo é de referẽncia para montagem da tabela.
+# o campo grupo identifica a estrutura (dispostivo) que o endereço pertence.
+# os grupos podem ser qualquer um que possa ser informado pelo simulador como o nome "device"
+# Caso o simulador envie um endereço que não existe ele é criado e o DataModel ajustado.
+# Caso o simulador envio uma faixa de endereço (end_inicial,end_final)
+#  é criado todos os endereços desta faixa.
+
+0x000000, 00000, endereço inicial, RAM
+0x000064, 00000, endereço final, RAM
+0x040000, 00000, endereço de dispositvo em geral
+0xffffff, 00000, endereço final Geral

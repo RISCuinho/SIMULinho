@@ -28,7 +28,12 @@ SIMULinho::SIMULinho(QWidget *parent) : QMainWindow(parent),  ui(new Ui::SIMULin
 
 void SIMULinho::setRegisterTableModel(QAbstractItemModel * model){
     ui->registersTableView->init(model);
-
+}
+void SIMULinho::setProgramTableModel(QAbstractItemModel * model){
+    ui->programTableView->init(model);
+}
+void SIMULinho::setDataTableModel(QAbstractItemModel * model){
+    ui->dataTableView->init(model);
 }
 
 SIMULinho::~SIMULinho()
