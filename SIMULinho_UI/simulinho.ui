@@ -39,7 +39,7 @@
           <height>531</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="memoryViewLayout">
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
          </property>
@@ -95,7 +95,7 @@
     <property name="title">
      <string>Módulos (Unidades)</string>
     </property>
-    <addaction name="actionDecodificador_de_Instru_o"/>
+    <addaction name="actionDecodificador_de_Instrucao"/>
     <addaction name="separator"/>
     <addaction name="actionRegistradores"/>
     <addaction name="actionMemoriaDePrograma"/>
@@ -126,9 +126,12 @@
     <string>Registradores</string>
    </property>
   </action>
-  <action name="actionDecodificador_de_Instru_o">
+  <action name="actionDecodificador_de_Instrucao">
    <property name="text">
     <string>Decodificador de Instrução</string>
+   </property>
+   <property name="toolTip">
+    <string>Decodificador de Instrução (DI)</string>
    </property>
   </action>
   <action name="actionALUInteger">
@@ -153,10 +156,13 @@
   </action>
   <action name="actionSair">
    <property name="text">
-    <string>Sair</string>
+    <string>&amp;Sair</string>
    </property>
    <property name="statusTip">
     <string>Saír da Interface e interromper a simulação.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>

@@ -33,6 +33,8 @@ signals:
 private slots:
     void on_actionSair_triggered();
 
+    void on_actionMemriaDeDados_triggered();
+
 private:
     Ui::SIMULinho *ui;
 };

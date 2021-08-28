@@ -1,4 +1,6 @@
 #include "simulinhovpi.h"
+#include "simulinhoserver.h"
+#include "simulinhodbusserver.h"
 
 #include <uuid/uuid.h>
 #include <veriuser.h>
@@ -6,12 +8,14 @@
 #include <vpi_user.h>
 
 static SIMULinhoVPI *simulinho;
+static SIMULinhoServer *simulinhoServer;
 static char *rtlName;
 static uuid_t uuid;
 
 static PLI_INT32 simulinho_compiletf(ICARUS_VPI_CONST PLI_BYTE8 *user_data)
 {
     (void)user_data;
+    simulinhoServer = SIMULinhoDBusServer::getInstance();
     simulinho = SIMULinhoVPI::getInstance();
 
     // get rtl project name

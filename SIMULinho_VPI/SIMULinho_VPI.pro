@@ -6,18 +6,18 @@
 
 QT       -= gui
 
-TARGET = simulinho
+TARGET = simulinhoVPI
 TEMPLATE = lib
 
 CONFIG += dll
 CONFIG += c++17
 
 CONFIG += no_keywords
-unix:CONFIG += link_pkgconfig
-unix:PKGCONFIG += dbus-cxx-2.0
 
+#unix:CONFIG += link_pkgconfig
+#unix:PKGCONFIG += dbus-cxx-2.0
 
-VERSION = 0.0.1
+//VERSION = 0.0.1
 
 DEFINES += SIMULINHO_VPI_LIBRARY
 
@@ -41,10 +41,17 @@ HEADERS += \
         simulinho.h
 
 DEPENDPATH += /usr/local/include/iverilog
+DEPENDPATH += $$PWD/../SIMULinho_LIB
 
 INCLUDEPATH += /usr/local/include/iverilog
+INCLUDEPATH += $$PWD/../SIMULinho_LIB
 
 unix:!macx: LIBS += -L/usr/local/lib/ -lvpi -lveriuser
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho
+else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho
+
 
 unix {
     target.path = /usr/lib
@@ -64,9 +71,3 @@ modulevpi.commands = $${QMAKE_CXX} -o ${QMAKE_FILE_OUT} \
                                  $(LIBS)
 QMAKE_EXTRA_COMPILERS += modulevpi
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
-else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
-
-INCLUDEPATH += $$PWD/../SIMULinho_LIB
-DEPENDPATH += $$PWD/../SIMULinho_LIB

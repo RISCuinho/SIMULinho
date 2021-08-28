@@ -44,7 +44,15 @@ SIMULinho::~SIMULinho()
 
 void SIMULinho::on_actionSair_triggered()
 {
-    //connect(ui->actionSair, &QAction::triggered, this, &QWidget::close);
-    printf("Sair!\n");
+    printf("Sair triggered!\n");
 
+    QWidget::close();
 }
+
+void SIMULinho::on_actionMemriaDeDados_triggered()
+{
+    //ui->tabWidget->tabBar()
+    //ui->tabMemoria->setVisible(true);
+    ui->tabMemoria->show();
+}
+

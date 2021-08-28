@@ -24,6 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+##unix:CONFIG += link_pkgconfig
+##unix:PKGCONFIG += dbus-cxx-2.0
 
 SOURCES += \
         simulinho.cpp \
@@ -39,7 +41,7 @@ FORMS += \
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/release/ -lSIMULinho_LIB
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SIMULinho_LIB/debug/ -lSIMULinho_LIB
-else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho_LIB
+else:unix: LIBS += -L$$OUT_PWD/../SIMULinho_LIB/ -lSIMULinho
 
 INCLUDEPATH += $$PWD/../SIMULinho_LIB
 DEPENDPATH += $$PWD/../SIMULinho_LIB

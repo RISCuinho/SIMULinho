@@ -8,11 +8,13 @@ QT       -= gui
 
 CONFIG += c++17
 
-TARGET = SIMULinho_LIB
+TARGET = SIMULinho
 
 TEMPLATE = lib
 
-DEFINES += SIMULINHO_LIB_LIBRARY
+//VERSION = 0.0.1
+
+DEFINES += SIMULINHO_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -26,16 +28,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        simulinho_lib.cpp
+        simulinhodbusclient.cpp \
+        simulinhodbusserver.cpp
 
 HEADERS += \
-        simulinho_lib.h \
-        simulinho_lib_global.h 
+        simulinho_lib_global.h  \
+        simulinhoclient.h \
+        simulinhodbus.h \
+        simulinhodbusclient.h \
+        simulinhodbusserver.h \
+        simulinhoserver.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+unix:CONFIG += link_pkgconfig
+unix:PKGCONFIG += dbus-cxx-2.0
+
+DEPENDPATH += /usr/local/include/dbus-cxx-2.0
+DEPENDPATH += /usr/local/include/sigc++-3.0
+
+INCLUDEPATH += /usr/local/include/dbus-cxx-2.0
+INCLUDEPATH += /usr/local/include/sigc++-3.0
+INCLUDEPATH += /usr/local/lib/sigc++-3.0/include/
 
 DISTFILES += \
     SIMULinho_dbus.xml
