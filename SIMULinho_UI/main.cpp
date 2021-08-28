@@ -11,8 +11,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     SIMULinho w;
 
-
-    QApplication app( argc, argv );
     QStandardItemModel *model=new QStandardItemModel();
 
     QFile file(":/registers.txt");
