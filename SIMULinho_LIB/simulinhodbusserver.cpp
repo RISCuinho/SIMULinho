@@ -6,7 +6,7 @@
 #include <iostream>
 
 std::string version(){
-
+    printf("SIMULinhoDBusServer version method");
     return "0";
 }
 
@@ -15,20 +15,25 @@ std::string version(){
 
 SIMULinhoDBusServer::SIMULinhoDBusServer()
 {
-    std::shared_ptr<DBus::Dispatcher> dispatcher = DBus::StandaloneDispatcher::create();
+    connection->add_thread_dispatcher( thrDisp );
 
-    std::shared_ptr<DBus::Connection> conn = dispatcher->create_connection(DBus::BusType::SESSION);
-
-    if( conn->request_name(SIMULINHO_DBUS_DOMAIN,
-                           DBUSCXX_NAME_FLAG_REPLACE_EXISTING )
-            != DBus::RequestNameResponse::PrimaryOwner )
+    DBus::RequestNameResponse ret = connection->request_name(
+                SIMULINHO_DBUS_DOMAIN,
+                DBUSCXX_NAME_FLAG_REPLACE_EXISTING);
+    printf("SIMULinhoDBusServer connection result: %s, %i !\n", ret,ret);
+    if( ret != DBus::RequestNameResponse::PrimaryOwner )
         return ;
 
-     std::shared_ptr<DBus::Object> object = conn->create_object(SIMULINHO_DBUS_OBJECT_PATH,
+    printf("SIMULinhoDBusServer dispatcher and connection: %s ok!\n", SIMULINHO_DBUS_DOMAIN);
+
+    object = connection->create_object(SIMULINHO_DBUS_OBJECT_PATH,
                                  DBus::ThreadForCalling::DispatcherThread);
 
+    printf("SIMULinhoDBusServer new object path: %s\n", SIMULINHO_DBUS_OBJECT_PATH);
 
     object->create_method<std::string()>(SIMULINHO_DBUS_INTERFACE,
                                          "version",
                                          sigc::ptr_fun(version) );
+
+    printf("SIMULinhoDBusServer new method: version, interface: %s\n", SIMULINHO_DBUS_INTERFACE);
 }

@@ -1,0 +1,3 @@
+[submodule "EquipoGraph_LIB"]
+	path = EquipoGraph_LIB
+	url = https://github.com/RISCuinho/EquipoGraph_LIB.git

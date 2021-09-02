@@ -1,6 +1,6 @@
 #include "simulinhovpi.h"
-#include "simulinhoserver.h"
-#include "simulinhodbusserver.h"
+#include "simulinhoclient.h"
+#include "simulinhodbusclient.h"
 
 #include <uuid/uuid.h>
 #include <veriuser.h>
@@ -8,14 +8,15 @@
 #include <vpi_user.h>
 
 static SIMULinhoVPI *simulinho;
-static SIMULinhoServer *simulinhoServer;
+static SIMULinhoClient *simulinhoClient;
 static char *rtlName;
 static uuid_t uuid;
 
 static PLI_INT32 simulinho_compiletf(ICARUS_VPI_CONST PLI_BYTE8 *user_data)
 {
     (void)user_data;
-    simulinhoServer = SIMULinhoDBusServer::getInstance();
+    simulinhoClient = SIMULinhoDBusClient::getInstance();
+    vpi_printf("Vesão SIMULinho Srever %s", simulinhoClient->simulatorVersion());
     simulinho = SIMULinhoVPI::getInstance();
 
     // get rtl project name

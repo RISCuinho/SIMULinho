@@ -6,13 +6,13 @@
 
 QT       -= gui
 
-CONFIG += c++17
+CONFIG += c++1z
 
 TARGET = SIMULinho
 
 TEMPLATE = lib
 
-//VERSION = 0.0.1
+##VERSION = 0.0.1
 
 DEFINES += SIMULINHO_LIBRARY
 
@@ -44,9 +44,6 @@ unix {
     INSTALLS += target
 }
 
-unix:CONFIG += link_pkgconfig
-unix:PKGCONFIG += dbus-cxx-2.0
-
 DEPENDPATH += /usr/local/include/dbus-cxx-2.0
 DEPENDPATH += /usr/local/include/sigc++-3.0
 
@@ -56,3 +53,16 @@ INCLUDEPATH += /usr/local/lib/sigc++-3.0/include/
 
 DISTFILES += \
     SIMULinho_dbus.xml
+
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += dbus-cxx-2.0
+unix: PKGCONFIG += dbus-cxx-glib-2.0
+unix: PKGCONFIG += dbus-cxx-qt-2.0
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../usr/lib/i386-linux-gnu/release/ -lglib-2.0
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../usr/lib/i386-linux-gnu/debug/ -lglib-2.0
+else:unix: LIBS += -L$$PWD/../../../../../../usr/lib/i386-linux-gnu/ -lglib-2.0
+
+INCLUDEPATH += $$PWD/../../../../../../usr/lib/i386-linux-gnu/glib-2.0/include
+DEPENDPATH += $$PWD/../../../../../../usr/lib/i386-linux-gnu/glib-2.0/include

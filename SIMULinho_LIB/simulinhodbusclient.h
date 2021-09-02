@@ -4,7 +4,12 @@
 #include "simulinho_lib_global.h"
 #include "simulinhoclient.h"
 #include "simulinhodbus.h"
+
 #include "shared_mutex"
+
+#include <dbus-cxx.h>
+#include <iostream>
+
 
 class SIMULINHO_LIB_SHARED SIMULinhoDBusClient : public
         SIMULinhoClient,
@@ -15,9 +20,15 @@ public:
 
     static SIMULinhoClient* getInstance();
 
+protected:
+    std::shared_ptr<DBus::Dispatcher> dispatcher = DBus::StandaloneDispatcher::create();
+    std::shared_ptr<DBus::Connection> connection = dispatcher->create_connection( DBus::BusType::SESSION );
+
+    std::shared_ptr<DBus::ObjectProxy>  objectProxy ;
 
 private:
-    SIMULinhoDBusClient(){}
+    SIMULinhoDBusClient();
+
 
 #if (__cplusplus < 201703L)
 public:

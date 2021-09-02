@@ -9,15 +9,16 @@ QT       -= gui
 TARGET = simulinhoVPI
 TEMPLATE = lib
 
-CONFIG += dll
-CONFIG += c++17
-
 CONFIG += no_keywords
 
-#unix:CONFIG += link_pkgconfig
-#unix:PKGCONFIG += dbus-cxx-2.0
+CONFIG += dll
+CONFIG += c++1z
 
-//VERSION = 0.0.1
+unix:CONFIG += link_pkgconfig
+unix:PKGCONFIG += dbus-cxx-2.0
+unix:PKGCONFIG += dbus-cxx-qt-2.0
+
+##VERSION = 0.0.1
 
 DEFINES += SIMULINHO_VPI_LIBRARY
 

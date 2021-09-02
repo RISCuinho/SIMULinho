@@ -24,7 +24,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabMemoria">
        <attribute name="title">
@@ -72,6 +72,11 @@
         <string>Decodificador de Instruções</string>
        </attribute>
       </widget>
+      <widget class="EquipoGraphWidget" name="tabRTL">
+       <attribute name="title">
+        <string>RTL</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -82,7 +87,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAjuda">
@@ -175,6 +180,12 @@
     <signal>signal1()</signal>
     <slot>slot1()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>EquipoGraphWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">equipographlib.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

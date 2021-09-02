@@ -1,6 +1,6 @@
 #include "simulinho.h"
-#include "simulinhoclient.h"
-#include "simulinhodbusclient.h"
+#include "simulinhoserver.h"
+#include "simulinhodbusserver.h"
 #include <QApplication>
 #include <QStandardItemModel>
 #include <QStandardItem>
@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     SIMULinho w;
 
-    SIMULinhoClient *client = SIMULinhoDBusClient::getInstance();
-    std::string version = client->simulatorVersion();
+    SIMULinhoServer *server= SIMULinhoDBusServer::getInstance();
+    (void)server;
 
     w.setRegisterTableModel(buildTableModel(":/registers.txt"));
     w.setProgramTableModel(buildTableModel(":/programmemory.txt"));
